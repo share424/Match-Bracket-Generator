@@ -2,7 +2,7 @@
 function Match(level, position) {
     this.level = level;
     this.position = position;
-    this.width = 200;
+    this.width = 100;
     this.playerRed = null;
     this.playerBlue = null;
     this.order = null;

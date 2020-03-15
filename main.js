@@ -1,7 +1,7 @@
 var canvas;
 // initialize
 setup = () => {
-    canvas = createCanvas(600, 800);
+    canvas = createCanvas(900, 800);
     
 }
 
