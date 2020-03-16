@@ -124,7 +124,52 @@ function Bracket(num) {
             }
         }
         this.matches.sort(this.compare_level_order).reverse();
-        //this.matches.forEach(match => console.log(match.levelOrder()))
+        // this.matches.forEach(match => console.log(match.levelOrder()))
+    }
+
+    this.hasMatch = function(level, position) {
+        for(let i = 0; i<this.matches.length; i++) {
+            if(this.matches[i].level == level && this.matches[i].position == position) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    this.seedPlayers = function(players) {
+        if(players.length != this.totalPlayer) {
+            return;
+        }
+        let j = 0
+        for(let i = 0; i<this.matches.length; i++) {
+            let currentLevel = this.matches[i].level;
+            var child1Pos = null;
+            var child2Pos = null;
+            if(currentLevel < this.totalFixLevel()) {
+                // locate the children position
+                child1Pos = this.matches[i].position * 2;
+                child2Pos = child1Pos + 1;
+            }
+            if(child1Pos == null || !this.hasMatch(currentLevel + 1, child1Pos)) {
+                this.matches[i].playerRed = players[j++];
+            }
+            
+            if(j >= players.length) {
+                break;
+            }
+            if(child2Pos == null  || !this.hasMatch(currentLevel + 1, child2Pos)) {
+                this.matches[i].playerBlue = players[j++];
+            }
+            
+            if(j >= players.length) {
+                break;
+            }
+        }
+
+    }
+
+    this.setPlayers = function(players) {
+        
     }
 
     this.compare_level_order = function(a, b) {

@@ -2,7 +2,7 @@
 function Match(level, position) {
     this.level = level;
     this.position = position;
-    this.width = 100;
+    this.width = 200;
     this.playerRed = null;
     this.playerBlue = null;
     this.order = null;
@@ -51,22 +51,27 @@ function Match(level, position) {
         let x = paper.width - (this.level * (this.width + 15)) - 15;
         let h = paper.height * (1 / Math.pow(2, 2 + this.level));
         let y = (4 * this.position + 2) * h;
-        
-        
 
         // player red
         // background
-        paper.rect(x - this.width, y - h - 25, this.width, 50, 3).attr({fill: "#58595e"});
+        paper.rect(x - this.width, y - h - 25, this.width, 50, 3).attr({fill: "#F6511D"});
         // line divider
         paper.rect(x - this.width, y - h, this.width, 1).attr({stroke: "#444549"});
-        // paper.text(x - this.width + 20, y - h + 12.5, this.playerRed.name).attr({fill: "#fff", "font-size": 12, "text-anchor": "start"});
-        // paper.text(x - this.width + 20, y - h + 37.5, this.playerRed.contingent).attr({fill: "#fff", "font-size": 12, "text-anchor": "start"});
+        if(this.playerRed) {
+            paper.text(x - this.width + 20, y - h - 12.5, this.playerRed.name).attr({fill: "#fff", "font-size": 12, "text-anchor": "start"});
+            paper.text(x - this.width + 20, y - h + 12.5, this.playerRed.contingent).attr({fill: "#fff", "font-size": 12, "text-anchor": "start"});    
+        }
 
         // player blue
-        paper.rect(x - this.width, y + h - 25, this.width, 50, 3).attr({fill: "#58595e"});
+        paper.rect(x - this.width, y + h - 25, this.width, 50, 3).attr({fill: "#00A6ED"});
         paper.rect(x - this.width, y + h, this.width, 1).attr({stroke: "#444549"});
-        // paper.text(x - this.width + 20, y + h + 12.5, this.playerBlue.name).attr({fill: "#fff", "font-size": 12, "text-anchor": "start"});
-        // paper.text(x - this.width + 20, y + h + 37.5, this.playerBlue.contingent).attr({fill: "#fff", "font-size": 12, "text-anchor": "start"});
+        if(this.playerBlue) {
+            paper.text(x - this.width + 20, y + h - 12.5, this.playerBlue.name).attr({fill: "#fff", "font-size": 12, "text-anchor": "start"});
+            paper.text(x - this.width + 20, y + h + 12.5, this.playerBlue.contingent).attr({fill: "#fff", "font-size": 12, "text-anchor": "start"});    
+        }
+
+        // order
+        paper.text(x + 1, y, this.levelOrder()).attr({fill: "#000", "font-size": 12, "text-anchor": "start"});
 
         // matching line
         paper.path("M" + (x + 5) + "," + (y - h) + "L" + (x + 10) + "," + (y - h) + "L" + (x + 10) + "," + (y + h) + "L"  + (x + 5) + "," + (y + h)).attr({"stroke-width": 2});
